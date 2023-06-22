@@ -21,14 +21,12 @@ public class Room {
 
     //외래키
     @OneToOne
-    @JoinColumn(name= "userId")
-    @ColumnDefault("")
+    @JoinColumn(name= "user_id")
     private User hostId;
 
     //외래키
-    @ManyToOne
-//    @JoinColumn(name= "userId")
-    @ColumnDefault("")
+    @OneToMany
+    @JoinColumn(name= "user_id")
     private User participantId;
 
     //몇명까지 가능인지

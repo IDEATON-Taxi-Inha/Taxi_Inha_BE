@@ -18,7 +18,7 @@ import java.util.List;
 public class User{
     @Id
     @GeneratedValue(strategy = IDENTITY)
-    private Long userId;
+    private Long user_id;
 
 
     @ColumnDefault("nickname")
