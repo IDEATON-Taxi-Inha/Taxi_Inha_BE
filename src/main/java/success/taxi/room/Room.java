@@ -27,7 +27,7 @@ public class Room {
     //외래키
     @OneToMany
     @JoinColumn(name= "user_id")
-    private User participantId;
+    private List<User> participantId;
 
     //몇명까지 가능인지
     @ColumnDefault("4")
