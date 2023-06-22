@@ -23,7 +23,7 @@ public class Room {
 
     //외래키
     @ColumnDefault("")
-    private Long participantId;
+    private Integer participantId;
 
     //몇명까지 가능인지
     @ColumnDefault("4")

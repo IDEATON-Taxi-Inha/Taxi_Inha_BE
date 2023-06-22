@@ -1,6 +1,7 @@
 package success.taxi.room;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import success.taxi.user.User;
 
@@ -13,7 +14,8 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/room")
 public class RoomController {
-    private final RoomRepository roomRepository;
+    @Autowired
+    RoomRepository roomRepository;
 
     //등록된 게시글들 조회
     @GetMapping("/list")
@@ -31,18 +33,22 @@ public class RoomController {
 
     //게시글 삭제
     //???이것두 작성자만 삭제할 수 있게 하는 건
-    @DeleteMapping(value = "/delete")
-    public String delete(Long roomId) {
-        Room oldRoom = roomRepository.findById(roomId).orElse(null);
-        if(oldRoom == null){
-            return "잘못된 정보";
+    @DeleteMapping("/delete")
+    public String delete(Long room_id, User user) {
+        if(user.getUserId().equals(roomRepository.findById(room_id).get().getHostId())) {
+            Room oldRoom = roomRepository.findById(room_id).orElse(null);
+            if(oldRoom == null){
+                return "잘못된 정보";
+            }
+            else{
+                oldRoom.setStatus("INACTIVE");
+                roomRepository.delete(oldRoom);
+                return "마감된 게시글";
+            }
         }
         else{
-            roomRepository.delete(oldRoom);
-            oldRoom.setStatus("INACTIVE");
-            return "마감된 게시글";
+            return "방장만 삭제 가능";
         }
     }
-
 
 }
