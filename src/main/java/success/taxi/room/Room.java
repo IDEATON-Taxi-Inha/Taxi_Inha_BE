@@ -1,8 +1,7 @@
 package success.taxi.room;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
 import static jakarta.persistence.GenerationType.IDENTITY;
 
 import lombok.*;
@@ -21,16 +20,20 @@ public class Room {
     private Long roomId;
 
     //외래키
+    @OneToOne
+    @JoinColumn(name= "userId")
     @ColumnDefault("")
-    private Long hostId;
+    private User hostId;
 
     //외래키
+    @ManyToOne
+//    @JoinColumn(name= "userId")
     @ColumnDefault("")
-    private Integer participantId;
+    private User participantId;
 
     //몇명까지 가능인지
     @ColumnDefault("4")
-    private Integer maxNum;
+    private Integer maxnum;
 
     @ColumnDefault("ACTIVE")
     private String status;

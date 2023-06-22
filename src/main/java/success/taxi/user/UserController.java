@@ -25,7 +25,7 @@ public class UserController {
     @PostMapping(value = "/join")
     public String join(User user) {
         userRepository.save(user);
-        return user.getNickName();
+        return user.getNickname();
     }
 
     //유저 탈퇴 및 학생 신분 아니면 탈퇴

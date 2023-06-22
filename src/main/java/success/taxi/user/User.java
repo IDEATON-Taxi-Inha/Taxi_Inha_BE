@@ -20,8 +20,9 @@ public class User{
     @GeneratedValue(strategy = IDENTITY)
     private Long userId;
 
-    @ColumnDefault("nickName")
-    private String nickName;
+
+    @ColumnDefault("nickname")
+    private String nickname;
 
     @ColumnDefault("male")
     private String gender;
