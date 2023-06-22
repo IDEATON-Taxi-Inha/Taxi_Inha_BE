@@ -33,8 +33,8 @@ public class RoomController {
 
     //게시글 삭제
     //???이것두 작성자만 삭제할 수 있게 하는 건
-    @DeleteMapping("/delete")
-    public String delete(Long room_id, User user) {
+    @DeleteMapping(value = "/{room_id}")
+    public String delete(@PathVariable Long room_id, User user) {
         if(user.getUserId().equals(roomRepository.findById(room_id).get().getHostId())) {
             Room oldRoom = roomRepository.findById(room_id).orElse(null);
             if(oldRoom == null){

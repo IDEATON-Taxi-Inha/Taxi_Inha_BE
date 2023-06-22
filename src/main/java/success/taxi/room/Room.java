@@ -4,14 +4,17 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import static jakarta.persistence.GenerationType.IDENTITY;
-import lombok.Getter;
-import lombok.Setter;
+
+import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 import success.taxi.user.User;
 
 import java.util.List;
 
-@Getter @Setter
+@Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Room {
     @GeneratedValue(strategy = IDENTITY)
     @Id

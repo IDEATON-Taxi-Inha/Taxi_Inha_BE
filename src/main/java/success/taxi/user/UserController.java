@@ -1,6 +1,7 @@
 package success.taxi.user;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import success.taxi.user.User;
 
@@ -8,9 +9,11 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/room")
+@RequestMapping("/user")
 public class UserController {
-    private final UserRepository userRepository;
+
+    @Autowired
+    UserRepository userRepository;
 
     //등록된 게시글들
     @GetMapping("/list")
