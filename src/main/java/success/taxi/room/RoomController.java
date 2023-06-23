@@ -3,10 +3,9 @@ package success.taxi.room;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import success.taxi.user.User;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 // ****일단은 서비스 단에서 구현할 내용들도 controller에 적겠슴둥***
 
@@ -21,6 +20,12 @@ public class RoomController {
     @GetMapping("/list")
     public List<Room> list(){
         return roomRepository.findAll();
+    }
+
+    //방 확인
+    @GetMapping("/{roomId}")
+    public Optional<Room> findRoom(@PathVariable Long roomId){
+        return roomRepository.findById(roomId);
     }
 
 
