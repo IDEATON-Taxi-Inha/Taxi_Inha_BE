@@ -23,14 +23,13 @@ public class UserController {
 
     //user가입
     @PostMapping(value = "/join")
-    public String join(User user) {
-        userRepository.save(user);
-        return user.getNickname();
+    public User join(@RequestBody User user) {
+        return userRepository.save(user);
     }
 
     //유저 탈퇴 및 학생 신분 아니면 탈퇴
-    @DeleteMapping(value = "/delete")
-    public String delete(Long user_id) {
+    @DeleteMapping(value = "/delete/{user_id}")
+    public String delete(@PathVariable Long user_id) {
         User user = userRepository.findById(user_id).orElse(null);
         if(user == null){
             return "존재하지 않는 아이디입니다.";
