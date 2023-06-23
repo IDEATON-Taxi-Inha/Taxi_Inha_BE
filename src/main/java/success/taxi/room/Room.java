@@ -1,13 +1,18 @@
 package success.taxi.room;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import static jakarta.persistence.GenerationType.IDENTITY;
 
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
+import success.taxi.paticipant.Participant;
 import success.taxi.user.User;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -15,19 +20,15 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Room {
+
     @GeneratedValue(strategy = IDENTITY)
     @Id
     private Long roomId;
 
     //외래키
     @OneToOne
-    @JoinColumn(name= "user_id")
+    @JoinColumn(name= "host_id")
     private User hostId;
-
-    //외래키
-    @OneToMany
-    @JoinColumn(name= "user_id")
-    private List<User> participantId;
 
     //몇명까지 가능인지
     @ColumnDefault("4")
@@ -42,5 +43,7 @@ public class Room {
     @ColumnDefault("인하대후문")
     private String destination;
 
-
+    @JsonManagedReference //양방향 관계에서 정방향(자식->부모) 참조할 변수에 어노테이션을 추가하면 직렬화에 포함된다
+    @OneToMany(mappedBy = "room")
+    private List<Participant> participants = new ArrayList<>();
 }
