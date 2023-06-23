@@ -26,33 +26,16 @@ public class RoomController {
 
     //게시글 등록
     @PostMapping("/create")
-    public Long create(Room room){
+    public Long create(@RequestBody Room room){
         roomRepository.save(room);
         return room.getRoomId();
     }
 
     //게시글 삭제
     //???이것두 작성자만 삭제할 수 있게 하는 건
-    @DeleteMapping(value = "/{room_id}")
-    public String delete(@PathVariable Long room_id, User user) {
-
-        //user_id 없어져서 일단 삭제안하구 보류시켜놓음ㅠㅠ
-
-        /*if(user.getUser_id().equals(roomRepository.findById(room_id).get().getHostId())) {
-            Room oldRoom = roomRepository.findById(room_id).orElse(null);
-            if(oldRoom == null){
-                return "잘못된 정보";
-            }
-            else{
-                oldRoom.setStatus("INACTIVE");
-                roomRepository.delete(oldRoom);
-                return "마감된 게시글";
-            }
-        }
-        else{
-            return "방장만 삭제 가능";
-        }*/
-        return "";
+    @DeleteMapping(value = "/delete/{room_id}")
+    public void delete(@PathVariable Long room_id) {
+        roomRepository.deleteById(room_id);
     }
 
 }
