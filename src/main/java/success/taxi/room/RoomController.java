@@ -34,8 +34,16 @@ public class RoomController {
     //게시글 삭제
     //???이것두 작성자만 삭제할 수 있게 하는 건
     @DeleteMapping(value = "/delete/{room_id}")
-    public void delete(@PathVariable Long room_id) {
-        roomRepository.deleteById(room_id);
+    public String delete(@PathVariable Long room_id) {
+        Room room = roomRepository.findById(room_id).orElse(null);
+        if (room == null) {
+            return "잘못된 정보";
+        } else {
+            // 관련된 Participant 엔티티들과의 관계를 제거하고 삭제
+            room.getParticipants().clear();
+            roomRepository.delete(room);
+            return "마감된 게시글";
+        }
     }
 
 }
