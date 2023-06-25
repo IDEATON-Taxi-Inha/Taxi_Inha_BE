@@ -11,4 +11,11 @@ jpa:
       show_sql: true
       format_sql: true
       naming:
-        PhysicalNamingStrategyStandardImpl : true
+        PhysicalNamingStrategyStandardImpl: true
+
+logging:
+  level:
+    com.tutorial: debug
+
+jwt:
+  secret:
