@@ -34,7 +34,7 @@ public class Room {
     @ColumnDefault("4")
     private Integer maxnum;
 
-    @ColumnDefault("ACTIVE")
+    @ColumnDefault("INACTIVE")
     private String status;
 
     @ColumnDefault("주안역")
