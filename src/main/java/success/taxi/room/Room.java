@@ -44,6 +44,6 @@ public class Room {
     private String destination;
 
     @JsonManagedReference //양방향 관계에서 정방향(자식->부모) 참조할 변수에 어노테이션을 추가하면 직렬화에 포함된다
-    @OneToMany(mappedBy = "room")
+    @OneToMany(mappedBy = "room", cascade = CascadeType.ALL) // cascade 설정 추가
     private List<Participant> participants = new ArrayList<>();
 }
