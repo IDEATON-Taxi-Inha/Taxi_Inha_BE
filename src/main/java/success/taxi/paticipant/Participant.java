@@ -20,9 +20,10 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @NoArgsConstructor
 public class Participant {
 
-    @GeneratedValue(strategy = IDENTITY)
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long participant_id;
+
 
     @JsonBackReference //양방향 관계에서 역방향(부모->자식) 참조로 어노테이션을 추가하면 직렬화에서 제외된다
     @ManyToOne

@@ -45,11 +45,9 @@ public class RoomController {
         return roomRepository.findById(roomId);
     }
 
-
     //게시글 등록
     @PostMapping("/create")
-
-    public Long create(@RequestBody Room room, @RequestHeader Map<String, String> headers){
+    public Long create(@RequestBody Room room, @RequestHeader Map<String, String> headers) {
 
         //헤더에 저장된 hostid값 받아와서 찾기
         String num = headers.get("hostid");
@@ -59,9 +57,12 @@ public class RoomController {
         //설정값 저장해주고 저장
         room.setHostId(user);
         room.setStatus("ACTIVE");
+        roomRepository.save(room);
+
+        return 1L;
+    }
 
     //게시글 삭제
-
     @DeleteMapping(value = "/{room_id}")
     public String delete(@PathVariable Long room_id) {
 
